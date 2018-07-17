@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.tcmp.dao.CodeMapper">
+
+	<resultMap type="Code" id="codeList">
+		<id column="codeId" property="codeId"></id>
+		<result column="codeName" property="codeName" />
+		<result column="codePwd" property="codePwd" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="levelId" property="levelId" />
+		<result column="rate" property="rate" />
+		<!-- 添加图片 暂未开发 -->
+		<!-- <result column="" property=""/> -->
+	</resultMap>
+	<select id="SelectCodeAll" resultType="Map">
+		select * from code where
+		levelid=#{levelID} ORDER BY codeId DESC
+	</select>
+
+	<!-- 带条件的分页查询 -->
+	<select id="SelectCodePage" resultMap="codeList" parameterType="CodeDTO">
+		select * from code
+		<trim prefix="where" prefixOverrides="and">
+			<if test="levelId>0">
+				and levelId=#{levelID}
+			</if>
+			<if test="codeName!=null">
+				and codeName like concat('%',#{codeName},'%')
+			</if>
+		</trim>
+		limit #{fromTo},#{pageSize}
+	</select>
+
+
+	<!-- 条件查询 -->
+
+	<select id="SelectCodeWhere" resultMap="codeList" parameterType="CodeDTO">
+		select * from code
+		<trim prefix="where" prefixOverrides="and">
+			<if test="levelId>0">
+				and levelId=#{levelID}
+			</if>
+			<if test="codeName!=null">
+				and codeName like concat('%',#{codeName},'%')
+			</if>
+		</trim>
+	</select>
+
+	<!-- 返回总行数 -->
+	<select id="selectCount" resultType="int">
+		select count(1) from code
+	</select>
+
+
+	<delete id="deleteCode" parameterType="Code">
+		delete from code where codeId=#{codeId}
+	</delete>
+
+
+	<!--向商户表中插入数据 -->
+	<insert id="IntegerCode" parameterType="Code">
+		insert into code
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="codeName !=null and codeName !=''">
+				codeName,
+			</if>
+			<if test="codePwd!=null and codePwd!=''">
+				codePwd,
+			</if>
+			<if test="phone!=null and phone!=''">
+				phone,
+			</if>
+			<if test="address!=null and address!=''">
+				address,
+			</if>
+			<if test="levelId!=null and levelId>0">
+				levelId,
+			</if>
+			<if test="rate !=null and rate>0">
+				rate,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="codeName!=null and codeName!=''">
+				#{codeName},
+			</if>
+			<if test="codePwd!=null and codePwd!=''">
+				#{codePwd},
+			</if>
+			<if test="phone!=null and phone!=''">
+				#{phone},
+			</if>
+			<if test="address!=null and address!=''">
+				#{address},
+			</if>
+			<if test="levelId!=null and levelId>0">
+				#{levelId},
+			</if>
+			<if test="rate !=null and rate>0">
+				#{rate},
+			</if>
+		</trim>
+	</insert>
+	<!--获取主键Id  -->
+	<select id="selectCodeById" resultMap="codeList">
+		select * from code  where codeId=#{codeId}
+	</select>
+
+	<!--修改 -->
+	<update id="updateCode" parameterType="Code">
+		update code
+		<trim prefix="set" suffixOverrides=",">
+			<if test="codeId!=null and codeId>0">
+				codeId=#{codeId},
+			</if>
+			<if test="codeName!=null and codeName!=''">
+				codeName=#{codeName},
+			</if>
+			<if test="codePwd!=null and codePwd!=''">
+				codePwd=#{codePwd},
+			</if>
+			<if test="phone!=null and phone!=''">
+				phone=#{phone},
+			</if>
+			<if test="address!=null and address!=''">
+				address=#{address},
+			</if>
+			<if test="levelId!=null and levelId>0">
+				levelId=#{levelId},
+			</if>
+			<if test="rate !=null and rate>0">
+				rate=#{rate},
+			</if>
+		</trim>
+		where codeId=#{codeId}
+	</update>
+	
+	
+	
+</mapper>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>流水信息</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/statisticalTest.css" rel="stylesheet">
+
+    <!--BootStarp下拉框-->
+    <link rel="stylesheet" href="css/bootstrap-select-lg.css">
+
+    <script src="js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="js/jquery-labelauty.js"></script>
+
+    <script src="js/vue.js"></script>
+
+    <link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <!--复选框,单选按钮-->
+    <link rel="stylesheet" href="Font-Awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="css/build.css" />
+    <link rel="stylesheet" href="css/jquery-labelauty.css" />
+</head>
+<style>
+    .main_right {
+        height: 350px;
+    }
+
+    #pageList {
+        text-align: center;
+    }
+
+    #pageList a {
+        margin-top: 10px
+    }
+
+    .group {
+        display: inline-block;
+
+    }
+
+    .modal-body td {
+        border: 1px solid transparent !important;
+    }
+
+    .modal-input {
+        width: 55%;
+    }
+
+    .body_middle td {
+        vertical-align: middle;
+    }
+
+    .icon-Location {
+        position: absolute;
+        left: 220px;
+        top: 6px;
+    }
+
+    .modal-input-xs {
+        width: 120px;
+    }
+
+    .dowebok2 {
+        padding: 0;
+    }
+
+    .dowebok2 li {
+        display: inline-block;
+    }
+
+    .input_width {
+        width: 120px;
+        font-size: 14px;
+    }
+
+    .group {
+        display: inline-block;
+    }
+
+    #noticeInfo {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    #formClass {
+        width: 90%;
+        margin: 0px auto;
+    }
+
+    input:-webkit-autofill {
+        /* //关于解决输入框背景颜色 */
+        -webkit-box-shadow: 0 0 0px 1000px #faf9fb inset !important; 
+        /* //关于接输入框文字颜色 */
+        -webkit-text-fill-color: rgba(255, 255, 255, 1) !important; 
+    }
+
+    #noticeInfo tr td {
+        text-align: center;
+        white-space: nowrap;
+        /* 不换行 */
+        overflow: hidden;
+        /* 内容超出宽度时隐藏超出部分的内容 */
+        text-overflow: ellipsis;
+        /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+        ;
+        /* 内容超出宽度时隐藏超出部分的内容 */
+    }
+
+    .modal-input {
+        width: 80%;
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table tr:nth-child(odd){
+        background:#F4F4F4;
+    }
+    table tr:nth-child(even)
+    {color: #1299cc;}
+
+    table tr:hover{background:#73B1E0;color: #ff1821;}
+</style>
+
+<body>
+    <div class="container-fluid" id="app">
+        <div class="main">
+
+            <div class="main" style="background-color: #FFFFFF">
+                <!--changeTab(0)-->
+                <div class="main_right_item">
+                    <div style="margin: 0 auto;display: block">
+                        <form id="formClass" method="post">
+                            <h1 style="text-align: center"><em>流水账单查询</em></h1>
+                            <div class="form-group group">
+                                <span>商户名称：</span>
+                                <input style="padding-top: 4px" type="text" class="form-control input_width" id="codeName" name="codeName" placeholder="商户名称">
+                            </div>
+                            <div class="form-group group">
+                                <input id="pageIndex" name="pageIndex" type="hidden" value="1">
+                                <button type="button" class="btn btn-success radius" id="btnQuery" @click="btnQuery()">
+                                    <i class="Hui-iconfont">&#xe665;</i> 搜索
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-hover" id="noticeInfo">
+                        <thead>
+                            <td>付款金额</td>
+                            <td>交易人</td>
+                            <td>交易时间</td>
+                            <td>实际付款</td>
+                            <td>操作</td>
+                        </thead>
+                        <tr v-for="(item,index) in rankList">
+                            <td>{{item.rankMoney}}</td>
+                            <td>{{item.codeName}}</td>
+                            <td>{{item.rankDate}}</td>
+                            <td>{{item.rankMoney-(item.rankMoney*item.rate)}}</td>
+                            <td>
+                                <button class="btn btn-xs btn-info" data-toggle='modal' data-target='#updDialog' @click="updById(item.rankId)">
+                                    <i class="Hui-iconfont">&#xe60c;</i>修改账单</button>
+                                <button class="btn btn-xs btn-danger" @click="Rankdel(item.rankId)">
+                                    <i class="Hui-iconfont" >&#xe615;</i>销毁
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="pageList" style="float: right">
+                    <a class="btn btn-default" id="sy" @click="sy()" href="javascript:void(0)">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default" id="syy" @click="syy()" href="javascript:void(0)">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default" id="xyy" @click="xyy()" href="javascript:void(0)">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default" id="wy" @click="wy()" href="javascript:void(0)">尾页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <!--修改模态框-->
+            <div class="modal fade bs-example-modal-xs" id="updDialog" role="dialog">
+                <div class="modal-dialog modal-xs" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">编辑账单</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formUpd" class="form-horizontal">
+                                <div class="form-group">
+                                    <span for="u_rankId" class="col-sm-3 control-label">编号：</span>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control modal-input" id="u_rankId" name="rankId" readonly >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <span for="u_rankMoney" class="col-sm-3 control-label">修改金额：</span>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control modal-input" id="u_rankMoney" name="rankMoney"  >
+                                </div>
+                            </div>
+                                <div class="form-group" hidden>
+                                    <span for="u_codeId" class="col-sm-3 control-label">交易人：</span>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control modal-input" id="u_codeId" name="codeId" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span for="u_rankDate" class="col-sm-3 control-label">修改时间：</span>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control modal-input" id="u_rankDate" name="rankDate" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span for="u_rate" class="col-sm-3 control-label">修改费率：</span>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control modal-input" id="u_rate" name="rate" >
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal" @click="updateRank()">
+                                <i class="Hui-iconfont">&#xe632;&nbsp;</i>保存
+                            </button>
+                            <button class="btn btn-warning" data-dismiss="modal">
+                                <i class="Hui-iconfont">&#xe60b;&nbsp;</i>取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    //动态绑定教师
+    $(function () {
+        $(':input').labelauty();
+    });
+
+    $(function () {
+        $.ajax({
+            url: "http://localhost:8080/classInfo/selectHeadTeacher.do",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.teacherList.length; i++) {
+                    console.log(data.teacherList[i])
+                    if (data.teacherList[i].detailID == 7) {
+                        $('#teacherId').append("<option value=" + data.teacherList[i].teacherId +">" + data.teacherList[i].teacherName + "</option>");
+                        $('#add_teacherId').append("<option value=" + data.teacherList[i].teacherId +">" + data.teacherList[i].teacherName + "</option>");
+                        $('#upd_teacherId').append("<option value=" + data.teacherList[i].teacherId +">" + data.teacherList[i].teacherName + "</option>");
+
+                    } else if (data.teacherList[i].detailID == 8) {
+                        $('#headTeacherId').append("<option value=" + data.teacherList[i].teacherId +">" + data.teacherList[i].teacherName + "</option>");
+                        $('#add_HeadteacherId').append("<option value=" + data.teacherList[i].teacherId +">" + data.teacherList[i].teacherName + "</option>");
+                        $('#upd_HeadteacherId').append("<option value=" + data.teacherList[i].teacherId +">" + data.teacherList[i].teacherName + "</option>");
+                    }
+                }
+                $('#teacherId').selectpicker('refresh');
+                $('#headTeacherId').selectpicker('refresh');
+                $('#add_teacherId').selectpicker('refresh');
+                $('#upd_teacherId').selectpicker('refresh');
+                $('#add_HeadteacherId').selectpicker('refresh');
+                $('#upd_HeadteacherId').selectpicker('refresh');
+
+
+            },
+            error: function (data) {
+                // alert("查询班主任失败" + data);
+            }
+        });
+    })
+</script>
+
+<script>
+    //初始进来时传入一个条件pageIndex=1
+    var Initdate = $("#formClass").serialize();
+    //vue绑定表格
+    var app = new Vue({
+        el: "#app",
+        data: {
+            classInfo: [],
+            pageCount: 0,
+            item: 0,
+            byIdInfo: [],
+            teacherList: [],
+            TeacherInfo: [],
+            rankList:[]
+        },
+        methods: {
+            abc(id){
+                alert(id);
+            },
+            getCodeAll(data) {
+                $.post("http://localhost:8080/shopDemo/rank/selRankPage.do", data, function (result) {
+                    console.log("返回的Json数据:" + result.rankPageList.codeName);
+                    for (var i = 0; i < result.rankPageList.length; i++) {
+                        console.log(result.rankPageList[i]);
+                    }
+                    app.rankList = result.rankPageList;
+                    app.pageCount = result.page.pageCount;
+                }, "json");
+            },
+            //查询按钮
+            btnQuery() {
+                $("#pageIndex").val(1);
+                var date = $("#formClass").serialize();
+                this.getCodeAll(date)
+            },
+            //首页
+            sy() {
+                $("#pageIndex").val(1);
+                this.getCodeAll(Initdate)
+            },
+            //上一页
+            syy() {
+                var a = parseInt($("#pageIndex").val());
+                $("#pageIndex").val(a - 1);
+                var pageIn = $("#formClass").serialize();
+                this.getCodeAll(pageIn)
+            },
+            //下一页
+            xyy() {
+                var a = parseInt($("#pageIndex").val());
+                $("#pageIndex").val(a + 1);
+                var pageIn = $("#formClass").serialize();
+                this.getCodeAll(pageIn)
+            },
+            //尾页
+            wy() {
+                $("#pageIndex").val(this.pageCount);
+                var pageIn = $("#formClass").serialize();
+                this.getCodeAll(pageIn)
+            },
+
+            updById(rankId){
+                $.post("http://localhost:8080/shopDemo/rank/selRankById.do", {rankId: rankId}, function (result) {
+                    console.log(result.rankId);
+                    $("#u_rankId").val(result.rankId);
+                    $("#u_rankMoney").val(result.rankMoney);
+                    $("#u_codeId").val(result.codeId);
+                    $("#u_rankDate").val(result.rankDate);
+                    $("#u_rate").val(result.rate);
+                }, "json");
+            },
+
+            //修改按钮
+            updateRank() {
+                var formUpd = $("#formUpd").serialize();
+                $.post("http://localhost:8080/shopDemo/rank/updateRank.do", formUpd, function (result) {
+                    console.log(result)
+                    if (result) {
+                        alert("账单已修改成功");
+                        var date = $("#formClass").serialize();
+                        app.getCodeAll(date)
+                    } else {
+                        alert("账单修改失败");
+                    }
+                }, "json");
+            },
+            Rankdel(rankId){
+                if(confirm("确认删除此账单吗?")) {
+                    $.post("http://localhost:8080/shopDemo/rank/deleteRank.do?", {rankId:rankId}, function (result) {
+                        if (result) {
+                            alert("账单删除成功");
+                            var date = $("#formClass").serialize();
+                            app.getCodeAll(date)
+                        } else {
+                            alert("账单删除失败");
+                        }
+                    }, "text");
+                }
+            },
+
+        },
+
+        //页面加载时去试卷信息表查询试卷编号和名称
+//        created() {
+//            this.getTableAll(Initdate);
+//        }
+        created() {
+            this.getCodeAll(Initdate);
+
+        }
+    })
+</script>
+
+
+</html>

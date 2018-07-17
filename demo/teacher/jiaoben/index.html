@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>jQuery简洁的日历签到插件 - 站长素材</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="css/sign2.css">
+
+<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/calendar2.js"></script>
+<script type="text/javascript">
+$(function(){
+  //ajax获取日历json数据
+  var signList=[{"signDay":"01"},{"signDay":"02"},{"signDay":"04"},{"signDay":"06"},{"signDay":"07"},{"signDay":"11"},{"signDay":"12"},{"signDay":"13"}];
+   calUtil.init(signList);
+});
+</script>
+
+</head>
+<body>
+	
+<div style="" id="calendar"></div>
+
+</body>
+</html>

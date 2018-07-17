@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- Bootstrap -->
+    <link href="index/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="index/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="index/css/style.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="index/js/html5shiv.js"></script>
+    <script src="index/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="pad20">
+    <!--stats start-->
+    <div class="stats-cont row mart20">
+        <div class="col-sm-3 ">
+            <div class="stats-panel stats-blue clear">
+                <div class="left"><img src="index/images/stats1.png" height="104" width="83" alt=""></div>
+                <div class="auto stats-txt">
+                    <p>学生总数</p>
+                    <p class="stats-num"><a href="#">132</a></p>
+                </div>
+                <a href="#" class="more clear"><span class="left">More</span> <i
+                        class="right fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-sm-3 ">
+            <div class="stats-panel stats-red clear">
+                <div class="left"><img src="index/images/stats2.png" height="104" width="83" alt=""></div>
+                <div class="auto stats-txt">
+                    <p>在线人数</p>
+                    <p class="stats-num"><a href="#">7</a></p>
+                </div>
+                <a href="#" class="more clear"><span class="left">More</span> <i
+                        class="right fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-sm-3 ">
+            <div class="stats-panel stats-green clear">
+                <div class="left"><img src="index/images/stats3.png" height="104" width="83" alt=""></div>
+                <div class="auto stats-txt">
+                    <p>试题总数</p>
+                    <p class="stats-num"><a href="#">8875</a></p>
+                </div>
+                <a href="#" class="more clear"><span class="left">More</span> <i
+                        class="right fa fa-angle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-sm-3 ">
+            <div class="stats-panel stats-purple clear">
+                <div class="left"><img src="index/images/stats4.png" height="104" width="83" alt=""></div>
+                <div class="auto stats-txt">
+                    <p>博文总数</p>
+                    <p class="stats-num"><a href="#">207</a></p>
+                </div>
+                <a href="#" class="more clear"><span class="left">More</span> <i
+                        class="right fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!--stats end-->
+    <!--排行榜-->
+    <!--sales-list start-->
+    <div class="sales-list row mart20">
+        <div class="col-sm-8">
+            <div class="pad20 bgf">
+                <div class="tit1 clear">
+                    <span class="left txt-left txt-blue"><i class="ico i-rank"></i>风云榜</span>
+                    <div class="right ">
+                        <a href="#">今日排行 <i class="fa fa-angle-down"></i></a>
+                    </div>
+                </div>
+                <div class="tab">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs sale-tabs" role="tablist">
+                        <li class="active"><a href="#tab1" role="tab" data-toggle="tab">本校</a></li>
+                        <li><a href="#tab2" role="tab" data-toggle="tab">本月</a></li>
+                        <li><a href="#tab3" role="tab" data-toggle="tab">本周</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+                            <div class="table-responsive mart20 sale-table">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <td width="10%">排名</td>
+                                        <td width="30%">姓名</td>
+                                        <td width="15%">总答题数</td>
+                                        <td width="15%">答对题数</td>
+                                        <td width="20%">正确率</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top1</span></td>
+                                        <td><a href="#">黄宝林</a></td>
+                                        <td>10013</td>
+                                        <td>8063</td>
+                                        <td>80%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top2</span></td>
+                                        <td><a href="#">朱晓宇</a></td>
+                                        <td>9920</td>
+                                        <td>7886</td>
+                                        <td>79%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top3</span></td>
+                                        <td><a href="#">陶相前</a></td>
+                                        <td>9877</td>
+                                        <td>7760</td>
+                                        <td>79%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top4</span></td>
+                                        <td><a href="#">朱凯丽</a></td>
+                                        <td>9777</td>
+                                        <td>7633</td>
+                                        <td>78%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top5</span></td>
+                                        <td><a href="#">林方政</a></td>
+                                        <td>9503</td>
+                                        <td>7308</td>
+                                        <td>76%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top6</span></td>
+                                        <td><a href="#">姚国旺</a></td>
+                                        <td>9502</td>
+                                        <td>7216</td>
+                                        <td>75%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top7</span></td>
+                                        <td><a href="#">竹松岩</a></td>
+                                        <td>9479</td>
+                                        <td>7098</td>
+                                        <td>74%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top8</span></td>
+                                        <td><a href="#">水坤祥</a></td>
+                                        <td>9450</td>
+                                        <td>6893</td>
+                                        <td>72%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top9</span></td>
+                                        <td><a href="#">赵明</a></td>
+                                        <td>9386</td>
+                                        <td>6744</td>
+                                        <td>71%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top10</span></td>
+                                        <td><a href="#">关要强</a></td>
+                                        <td>9207</td>
+                                        <td>6698</td>
+                                        <td>70%</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--tab2-->
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+                            <div class="table-responsive mart20 sale-table">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <td width="10%">排名</td>
+                                        <td width="30%">姓名</td>
+                                        <td width="15%">总答题数</td>
+                                        <td width="15%">答对题数</td>
+                                        <td width="20%">正确率</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top1</span></td>
+                                        <td><a href="#">黄宝林</a></td>
+                                        <td>3207</td>
+                                        <td>2789</td>
+                                        <td>86%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top2</span></td>
+                                        <td><a href="#">朱晓宇</a></td>
+                                        <td>3257</td>
+                                        <td>2704</td>
+                                        <td>86%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top3</span></td>
+                                        <td><a href="#">陶相前</a></td>
+                                        <td>3162</td>
+                                        <td>2677</td>
+                                        <td>84%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top4</span></td>
+                                        <td><a href="#">朱凯丽</a></td>
+                                        <td>3099</td>
+                                        <td>2647</td>
+                                        <td>85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top5</span></td>
+                                        <td><a href="#">林方政</a></td>
+                                        <td>3004</td>
+                                        <td>2513</td>
+                                        <td>83%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top6</span></td>
+                                        <td><a href="#">姚国旺</a></td>
+                                        <td>2944</td>
+                                        <td>2501</td>
+                                        <td>82%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top7</span></td>
+                                        <td><a href="#">竹松岩</a></td>
+                                        <td>2803</td>
+                                        <td>2489</td>
+                                        <td>88%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top8</span></td>
+                                        <td><a href="#">水坤祥</a></td>
+                                        <td>2766</td>
+                                        <td>2340</td>
+                                        <td>84%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top9</span></td>
+                                        <td><a href="#">赵明</a></td>
+                                        <td>2704</td>
+                                        <td>2298</td>
+                                        <td>83%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top10</span></td>
+                                        <td><a href="#">关要强</a></td>
+                                        <td>2642</td>
+                                        <td>2186</td>
+                                        <td>82%</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--tab3-->
+                        <div role="tabpanel" class="tab-pane" id="tab3">
+                            <div class="table-responsive mart20 sale-table">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <td width="10%">排名</td>
+                                        <td width="30%">姓名</td>
+                                        <td width="15%">总答题数</td>
+                                        <td width="15%">答对题数</td>
+                                        <td width="20%">正确率</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top1</span></td>
+                                        <td><a href="#">黄宝林</a></td>
+                                        <td>1023</td>
+                                        <td>903</td>
+                                        <td>88%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top2</span></td>
+                                        <td><a href="#">朱晓宇</a></td>
+                                        <td>1002</td>
+                                        <td>876</td>
+                                        <td>87%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="txt-red">Top3</span></td>
+                                        <td><a href="#">陶相前</a></td>
+                                        <td>993</td>
+                                        <td>821</td>
+                                        <td>86%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top4</span></td>
+                                        <td><a href="#">朱凯丽</a></td>
+                                        <td>974</td>
+                                        <td>803</td>
+                                        <td>82%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top5</span></td>
+                                        <td><a href="#">林方政</a></td>
+                                        <td>943</td>
+                                        <td>776</td>
+                                        <td>82%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top6</span></td>
+                                        <td><a href="#">姚国旺</a></td>
+                                        <td>931</td>
+                                        <td>763</td>
+                                        <td>81%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top7</span></td>
+                                        <td><a href="#">竹松岩</a></td>
+                                        <td>927</td>
+                                        <td>758</td>
+                                        <td>81%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top8</span></td>
+                                        <td><a href="#">水坤祥</a></td>
+                                        <td>921</td>
+                                        <td>753</td>
+                                        <td>81%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top9</span></td>
+                                        <td><a href="#">赵明</a></td>
+                                        <td>918</td>
+                                        <td>743</td>
+                                        <td>80%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>Top10</span></td>
+                                        <td><a href="#">关要强</a></td>
+                                        <td>903</td>
+                                        <td>736</td>
+                                        <td>80%</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="pad20 bgf">
+                <div class="tit1 clear">
+                    <span class="left txt-left txt-blue"><i class="ico i-rank"></i>通知公告</span>
+                </div>
+                <div class="report-list ">
+                    <ul>
+                        <li class="">
+                            <a href="#" style="color: #000;">
+                                <p class="report-txt1">高考进行中 </p>
+                                <p class="report-txt3">2018-6-07</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" style="color: #000;">
+                                <p class="report-txt1">精英挑战赛校区评审</p>
+                                <p class="report-txt3">2018-5-26</p>
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a href="#" style="color: #000;">
+                                <p class="report-txt1">课工场第一届拔河比赛决赛</p>
+                                <p class="report-txt3">2018-05-23</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" style="color: #000;">
+                                <p class="report-txt1">课工场第一届拔河比赛</p>
+                                <p class="report-txt3">2018-05-20</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" style="color: #000;">
+                                <p class="report-txt1">母亲节送祝福</p>
+                                <p class="report-txt3">2018-05-13</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" style="color: #000;">
+                                <p class="report-txt1">青年节，正青春，我有我的样</p>
+                                <p class="report-txt3">2015-05-04</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--sales-list end-->
+    <!--折线图-->
+    <!--chart start-->
+    <div class="chart mart20">
+        <div class="tit1 clear">
+            <span class="left txt-left txt-red"><i class="fa fa-share-alt"></i>日访问量</span>
+            <div class="right chart-tit-date">
+                <a href="#" class="active">日</a>
+            </div>
+        </div>
+
+        <div class="padt10">
+            <div class="chart-box padt10">
+                <div id="chart-container" class="chart-container"></div>
+            </div>
+        </div>
+    </div>
+    <!--chart end-->
+
+
+</div>
+
+
+<!--end js load-->
+<script src="index/js/jquery-1.9.1.min.js"></script>
+<script src="index/js/bootstrap.min.js"></script>
+<script src="index/js/highcharts.js"></script>
+<script src="index/js/common.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#chart-container').highcharts({
+            chart: {
+                type: 'area',
+                spacingBottom: 30
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: '',
+                floating: true,
+                align: 'right',
+                verticalAlign: 'bottom',
+                y: 15
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF'
+            },
+            xAxis: {
+                categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+            },
+            yAxis: {
+                title: {
+                    text: 'Y-Axis'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.x + ': ' + this.y;
+                }
+            },
+            plotOptions: {
+                area: {
+                    fillOpacity: 0.5
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'John',
+                data: [2000, 4200, 3010, 1200, 5000, 3400, 3120, 7000, 3400, 3120, 2000, 7000]
+            }]
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.tcmp.dao.RankMapper">
+	<resultMap type="Rank" id="rankList">
+		<id column="rankId" property="rankId"></id>
+		<result column="rankMoney" property="rankMoney" />
+		<result column="codeId" property="codeId" />
+		<result column="rankDate" property="rankDate" />
+		<result column="rate" property="rate" />
+		<result column="codeName" property="codeName" />
+	</resultMap>
+	<select id="selectRankAll" resultMap="rankList">
+		SELECT
+		r.rankId,
+		r.rankMoney,
+		r.codeId,
+		r.rankDate,
+		r.rate,
+		c.codeName
+		FROM
+		rank AS r
+		LEFT
+		JOIN `code` AS c ON r.codeId = c.codeId
+		ORDER BY
+		r.rankId DESC
+	</select>
+	<insert id="insertRankMoney" parameterType="Rank">
+		INSERT INTO
+		`demoshop`.`rank`
+		(`rankMoney`, `codeId`,
+		`rankDate`, `rate`) VALUES
+		(#{rankMoney}, #{codeId},
+		now(), #{rate});
+	</insert>
+
+	<delete id="deleteRank" parameterType="Rank">
+		delete from rank where
+		rankId=#{rankId}
+	</delete>
+
+	<!-- 分页查询流水账单 -->
+	<!-- 带条件的分页查询 -->
+	<select id="selectRankByPage" resultMap="rankList"
+		parameterType="RankDTO">
+		select * from rank AS r
+		INNER JOIN `code` AS c ON
+		r.codeId = c.codeId
+		where codeName like concat('%',#{codeName},'%')
+		limit #{fromTo},#{pageSize}
+	</select>
+
+
+	<!-- 分页查询付款账单 -->
+	<select id="selectRankPage" resultMap="rankList" parameterType="RankDTO">
+		select * from rank AS r
+		INNER JOIN `code` AS c ON r.codeId = c.codeId
+		ORDER BY r.rankId DESC
+		limit #{fromTo},#{pageSize}
+	</select>
+	<!-- 返回总行数 -->
+	<select id="selectRankCount" resultType="int">
+		select count(1) from rank
+	</select>
+	<!-- 根据主键获取ID 连接CodeName -->
+	<select id="selectByID" resultMap="rankList">
+		select * from rank AS r
+		INNER
+		JOIN `code` AS c ON r.codeId = c.codeId where rankId=#{rankId}
+	</select>
+
+	<!--修改 -->
+	<update id="updateRankMoney" parameterType="Rank">
+		UPDATE `demoshop`.`rank` SET `rankId`=#{rankId}, `rankMoney`=#{rankMoney},
+		`codeId`=#{codeId}, `rankDate`=NOW(), `rate`=#{rate} WHERE
+		(`rankId`=#{rankId});
+	</update>
+
+</mapper>

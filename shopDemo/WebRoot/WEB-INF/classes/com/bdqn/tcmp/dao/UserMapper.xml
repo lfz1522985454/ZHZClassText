@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.tcmp.dao.UserMapper">
+	<resultMap type="User" id="userList">
+		<id column="userId" property="userId" />
+		<result column="userName" property="userName" />
+		<result column="userPwd" property="userPwd" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="levelId" property="levelId" />
+	</resultMap>
+	<!--查询全部数据 -->
+	<select id="SelectUserAll" resultMap="userList">
+		select * from user
+		ORDER BY userId DESC <!-- Sql ：ORDER BY userId DESC 降序 -->
+	</select>
+
+	<!--查询全部数据 -->
+	<select id="selectUserByLevelID" resultType="Map">
+		select * from user where levelid>=#{levelID}
+	<!-- 	<trim prefix="where" prefixOverrides="and">
+			<if test="levelID==1">
+				and 1=1
+			</if>
+			<if test="levelID!=1">
+				and levelid=#{levelID}
+			</if> 
+		</trim> -->
+	<!-- 层级管理查询	where levelid>=#{levelID} -->
+		ORDER BY userId DESC
+	</select>
+
+	<!-- 查询一级代理商 -->
+	<select id="SelectUserOne" resultMap="userList">
+		select * from user where
+		levelId=1 ORDER BY userId DESC
+	</select>
+	<!--查询二级代理/一级代理的商户 -->
+	<select id="SelectUserTwo" resultMap="userList">
+		select * from user where
+		levelId=2 ORDER BY userId DESC
+	</select>
+
+	<!-- 登录时返回数据存入localStorage中 -->
+	<select id="userLogin" parameterType="UserDTO" resultType="User">
+		select * from user
+		<trim prefix="where" prefixOverrides="and">
+			<if test="userName!=null and userName!=''">
+				and userName=#{userName}
+			</if>
+			<if test="userPwd!=null and userPwd!='' ">
+				and userPwd=#{userPwd}
+			</if>
+		</trim>
+	</select>
+</mapper>
